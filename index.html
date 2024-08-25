@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Main</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<style>
+		@font-face {
+			font-family: 'PixelFont';
+			src: url('Pixelette Regular.ttf') format('truetype');
+		}
+		body {
+			background-color: #a6b6f8; /* Baby blue */
+			margin: 0; /* Remove default moved b */
+			padding: 0; /* Remove default padding */
+			box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
+		}
+		#massive-heading {
+			position: relative;
+			text-align: center;
+			font-family: 'PixelFont', sans-serif;
+			background: url('images/header.png') no-repeat center;
+			background-size: 100%;
+			background-position: center bottom;
+			padding: 15% 2%;
+			color: white;
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+			flex-wrap: wrap;
+		}
+		.first-section {
+			background-color: #a6b6f8; /* Baby blue for the first section */
+			padding: 20px;
+			text-align: center; /* Center all content */
+			box-sizing: border-box; /* Ensure padding is included in the section's total width */
+			overflow: hidden; /* Ensure content does not overflow */
+		}
+		.first-section .intro-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: row; 
+			flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+			max-width: 100%; /* Ensure container doesn't exceed section width */
+			box-sizing: border-box; /* Ensure padding is included in container's total width */
+		}
+		.first-section .profile-image {
+			max-width: 100%;
+			max-height: 500px; /* Limit height to prevent overflow */
+		}
+		.first-section .intro-text {
+			text-align: left; /* Align text to the left */
+			color: white;
+			margin-left: 20px; /* Space between image and text */
+		}
+		.first-section .intro-text h2 {
+			font-family: 'PixelFont', sans-serif; /* Apply pixelated font */
+			font-size: 4em; /* Adjust text size for "HI, I'M FARAH!" */
+			margin: 0; /* Remove default margin */
+		}
+		
+		.first-section .action-container {
+			margin-top: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.first-section .action-container .button-image {
+			cursor: pointer;
+			max-width: 25%; /* Ensure button and divider fit within container */
+			max-height: auto; /* Limit height of button and divider */
+		}
+		.first-section .action-container .divider-image {
+            width: 50%;
+            height: auto;
+        }
+		#full-story {
+			display: none; /* Use flexbox for main layout */
+			justify-content: space-between; /* Space between left and right sections */
+			align-items: flex-start; /* Align items to the start of the section */
+			padding: 20px;
+			color: white;
+		}
+
+		.left-section {
+			display: flex;
+			flex-direction: column; /* Stack upper and lower sections vertically */
+			width: 50%; /* Take half of the container width */
+			margin-left: 12%;
+		}
+
+		.upper-left {
+			flex: 1; /* Allow this section to grow and fill the space */
+			margin-bottom: 10px; /* Space between upper and lower sections */
+		}
+
+		.lower-left {
+			display: flex;
+			align-items: flex-start; /* Align domain text and buttons */
+		}
+
+		.domain-text {
+			margin-right: 20px; /* Space between text and buttons */
+		}
+
+		.button-container {
+			display: grid; /* Use grid for button layout */
+			grid-template-columns: repeat(2, 1fr); /* Two columns */
+			grid-template-rows: repeat(2, auto); /* Two rows */
+			gap: 10px; /* Space between buttons */
+		}
+
+		.button-container img {
+			width: 100%; /* Responsive width */
+			height: auto; /* Maintain aspect ratio */
+			cursor: pointer;
+		}
+
+		.right-section {
+			width: 50%; /* Take half of the container width */
+			display: flex;
+			justify-content: center; /* Center the image */
+			align-items: center; /* Center the image vertically */
+		}
+
+		.right-section img {
+			max-width: 80%; /* Limit the size of the image */
+			height: auto; /* Maintain aspect ratio */
+		}
+
+
+
+		
+		
+		.second-section {
+			display: flex; /* Use flexbox to position the left and right sections */
+			background-color: white; /* White background for the second section */
+			padding: 20px;
+			border-radius: 10px; /* Optional: Add some border-radius to soften the edges */
+			position: relative;
+		}
+
+		.second-section .left-section {
+			width: 40%; /* Take half of the container width */
+			margin-left: 0%;
+		}
+
+		.second-section .right-section {
+			width: 100%; /* Adjusted to full container width */
+			background-image: url('images/contact.png'); /* Set contact.png as the background */
+			background-size: 165%; /* Ensure the image covers the entire background */
+			background-repeat: no-repeat;
+			background-position: center; /* Center the background image */
+			position: relative; /* Set the positioning context */
+			margin: 0; /* Remove margin */
+			padding: 0; /* Remove padding */
+			height: 0; /* Set height relative to viewport width */
+			padding-bottom: 60%; /* 16:9 aspect ratio, adjust as needed for image aspect ratio */
+		}
+
+		.contact-title {
+			font-family: 'PixelFont', sans-serif;
+			font-size: 300%; /* Keep the font size relative to viewport width */
+			text-align: center;
+			text-decoration: underline;
+			position: absolute;
+			top: 15%; /* Position the title near the top */
+			left: 58%;
+			transform: translateX(-50%); /* Center the title horizontally */
+			color: rgb(255, 255, 255); /* Ensure the text color contrasts with the background */
+			z-index: 10; /* Bring the title above the background */
+			width: 50%; /* Adjust the width to prevent overflow */
+		}
+
+		.contact-details {
+			position: absolute;
+			top: 55%; /* Position the details below the title */
+			left: 78%;
+			transform: translate(-50%, -50%); /* Center-align the contact details */
+			color: white; /* Make the text white to contrast with the background */
+			font-size: 150%; /* Keep font size relative to viewport width */
+			z-index: 10; /* Ensure the details are above the background */
+			width: 80%; /* Control the width for better spacing */
+			text-align: center; /* Center align the text */
+		}
+
+		.contact-details p {
+			margin: 5% 0; /* Add spacing between each contact detail */
+		}
+
+		.contact-details a {
+			color: white; /* Ensure links are white */
+			text-decoration: none; /* Remove underline from links */
+		}
+
+		.contact-details a:hover {
+			text-decoration: underline; /* Add underline on hover */
+		}
+
+
+
+		.second-section .title-text{
+			position: relative;
+			margin-left: 7%;
+		}
+		.second-section .title-text h1 {
+			font-family: 'PixelFont', sans-serif; /* Apply pixelated font */
+			font-size: 4em; /* Adjust text size for "HI, I'M FARAH!" */
+			margin: 0; /* Remove default margin */
+		}
+		.second-section .title-text h2 {
+			font-family: 'PixelFont', sans-serif; 
+			font-size: 2em; 
+			margin: 0;
+			position: relative;
+			padding-left: 30px; /* Space for the pointer image */
+		}
+		.second-section .title-text h2::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 10%; /* Adjust the width as needed */
+			height: 100%; /* Adjust the height as needed */
+			background-image: url('images/pointer.png');
+			background-size: contain;
+			background-repeat: no-repeat;
+			transform: translateX(-35px); /* Adjust the position if necessary */
+		}
+
+		.second-section .title-text p {
+			font-size: 1em;
+			margin-left: 3.5%;
+			line-height: 2;
+			margin-bottom: 0;
+			position: relative;
+			padding-left: 20px; /* Adjust padding to make room for the bullet */
+		}
+		.second-section .title-text p::before {
+			content: "•"; /* Add bullet point */
+			color: orange;
+			font-size: 1.2em;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		.second-section .title-text img {
+			max-width: 60%; /* Increase the max-width to make the image larger */
+			height: auto; /* Maintain aspect ratio */
+			display: block; /* Ensure proper block-level layout */
+			margin-left: 0%; /* Center the image horizontally */
+			margin-top: 20px; /* Add some space above the image */
+		}
+		footer {
+			text-align: center; /* Center the image */
+			padding: 20px; /* Add padding around the footer */
+			background-color: #a6b6f8; /* Optional: Background color for the footer */
+		}
+
+		.footer-image {
+			width: 20%; /* Adjust width as needed */
+			height: auto; /* Maintain aspect ratio */
+			cursor: pointer; /* Change cursor to pointer on hover */
+			border: none; /* Remove border if any */
+		}
+
+	</style>
+	
+	
+	<body class="is-preload">
+			
+		<!-- Wrapper -->
+		<div id="wrapper" class="fade-in">
+			<!-- Intro -->
+			<div id="intro">
+				<h1 id="massive-heading">
+					PORTFOLIO
+				</h1>
+				<ul class="actions">
+					<li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+				</ul>
+			</div>
+				
+			<!-- Nav -->
+			<nav id="nav">
+				<ul class="links">
+					<li class="active"><a href="index.html">ABOUT ME</a></li>
+					<li><a href="projects.html">SKILLS</a></li>
+				</ul>
+			</nav>
+
+			<!-- Main -->
+			<div id="main">
+				<!-- First Section -->
+				<div class="section first-section">
+					<div class="intro-container">
+						<img src="images/me.png" alt="Profile Image" class="profile-image">
+						<div class="intro-text">
+							<h2><br>HI, <br>I'M FARAH!</br></h2>
+							<p>I’m in my final year in Diploma of Computer Science <br>
+							   at UiTM Cawangan Johor, and I’m really into coding.</p>
+						</div>
+					</div>
+					<div class="action-container"> <!-- Moved below the profile image -->
+						<img src="images/more.png" alt="Button" id="full-story-button" class="button-image">
+						<img src="images/divider.png" alt="Divider" class="divider-image">
+					</div>
+					<div id="full-story">
+						<div class="left-section">
+							<div class="upper-left">
+								<p>I'm always excited to bring ideas to life and <br>
+								   find new ways to improve my skills.<br><br>
+								</p>
+							</div>
+							<div class="lower-left">
+								<div class="domain-text">
+									<p>Domain of Interest:</p>
+								</div>
+								<div class="button-container">
+									<img src="images/development.png" alt="Development Button" class="button-image">
+									<img src="images/database.png" alt="Database Button" class="button-image">
+									<img src="images/software.png" alt="Software Button" class="button-image">
+									<img src="images/multimedia.png" alt="Multimedia Button" class="button-image">
+								</div>
+							</div>
+						</div>
+						<div class="right-section">
+							<img src="images/computer.png" alt="Computer Image">
+						</div>
+					</div>
+					
+					<img src="images/divider.gif" alt="divider">
+				</div>
+				
+			
+				<!-- Second Section -->
+				<div class="section second-section">
+					<div class="left-section">
+						<div class="title-text">
+							<h1>EDUCATION</h1>
+							<br>
+							<h2>October 2022 - Now:</h2>
+							<p><b>Universiti Teknology MARA</b><br>
+								Diploma in Computer Science<br>
+								Current CGPA: 3.75 (2022-2023)</p>
+							<br>
+							<h2>February 2022:</h2>
+							<p><b>SMK Seksyen 3 Bandar Kinrara</b><br>
+								Sijil Pelajaran Malaysia</p>
+						</div>
+						<br>
+						<div class="title-text">
+							<br><br>
+							<h1>HOBBIES</h1>
+							<img src="images/icon.png" alt="Image 3">
+						</div>
+					</div>
+					<div class="right-section">
+						<b><h1 class="contact-title">CONTACT</h1></b>
+						<div class="contact-details">
+							<p><a href="#" id="phone-number">+60102344652</a></p>
+   							<p><a href="#" id="email-address">farahayuni4080@gmail.com</a></p>
+							<p><a href="https://www.linkedin.com/in/farahlmn" target="_blank">farahlmn</a></p>
+							<p><a href="https://github.com/farahA04" target="_blank">github.farahA04</a></p>
+						</div>
+					</div>
+				</div>
+				<footer>
+					<a href="projects.html">
+						<img src="images/next.png" alt="Next" class="footer-image">
+					</a>
+				</footer>
+				
+
+
+			</div>
+		</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script>
+			// Ensure the DOM is fully loaded before attaching event listeners
+			document.addEventListener('DOMContentLoaded', function() {
+				const fullStory = document.getElementById('full-story');
+				const button = document.getElementById('full-story-button');
+		
+				button.addEventListener('click', function(event) {
+					event.preventDefault();
+					// Toggle the display property between 'none' and 'flex'
+					if (fullStory.style.display === 'none' || fullStory.style.display === '') {
+						fullStory.style.display = 'flex';
+					} else {
+						fullStory.style.display = 'none';
+					}
+				});
+			});
+		</script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+			const phoneNumber = document.getElementById('phone-number');
+			const emailAddress = document.getElementById('email-address');
+
+			phoneNumber.addEventListener('click', function(event) {
+				event.preventDefault();
+				copyToClipboard(phoneNumber.textContent);
+				alert('Phone number copied to clipboard!');
+			});
+
+			emailAddress.addEventListener('click', function(event) {
+				event.preventDefault();
+				copyToClipboard(emailAddress.textContent);
+				alert('Email address copied to clipboard!');
+			});
+
+			function copyToClipboard(text) {
+				const tempInput = document.createElement('input');
+				document.body.appendChild(tempInput);
+				tempInput.value = text;
+				tempInput.select();
+				document.execCommand('copy');
+				document.body.removeChild(tempInput);
+			}
+		});
+
+		</script>
+	</body>
+</html>
